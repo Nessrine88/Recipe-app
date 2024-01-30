@@ -1,6 +1,6 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_recipe, only: [:show, :edit, :destroy]
+  before_action :set_recipe, only: %i[show edit destroy]
 
   def index
     @recipes = current_user.recipes
@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def edit;end
+  def edit; end
 
   def destroy
     @recipe.destroy
