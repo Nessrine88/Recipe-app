@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   
-  get "up" => "rails/health#show", as: :rails_health_check
+  get 'up' => 'rails/health#show', as: :rails_health_check
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # Defines the root path route ('/')
+  # root 'posts#index'
 
   resources :recipes, except: [:update]
 end
