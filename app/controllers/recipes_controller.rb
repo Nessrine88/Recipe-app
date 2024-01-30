@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_recipe, only: [:show, :edit, :destroy]
 
   def index
     @recipes = current_user.recipes
@@ -16,15 +17,20 @@ class RecipesController < ApplicationController
   def create
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
-      redirect_to @recipe, notice: 'Recipe was successfully created'
+      redirect_to recipes_url, notice: 'Recipe was successfully created'
     else
       render :new
     end
   end
 
-  def edit
+  def edit;end
 
+  def destroy
+    @recipe.destroy
+    redirect_to recipes_url, notice: 'Recipe was successfully deleted'
   end
+
+  private
 
   def set_recipe
     @recipe = current_user.recipes.find(params[:id])
