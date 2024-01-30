@@ -150,12 +150,13 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.0-x86_64-darwin)
+    nokogiri (1.16.0-x64-mingw-ucrt)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pg (1.5.4)
+    pg (1.5.4-x64-mingw-ucrt)
     psych (5.1.2)
       stringio
     public_suffix (5.0.4)
@@ -234,6 +235,8 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    tzinfo-data (1.2023.4)
+      tzinfo (>= 1.0.0)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.1)
@@ -251,7 +254,7 @@ GEM
     zeitwerk (2.6.12)
 
 PLATFORMS
-  x86_64-darwin-21
+  x64-mingw-ucrt
   x86_64-linux
 
 DEPENDENCIES
