@@ -1,2 +1,12 @@
-<h1>Recipes#index</h1>
-<p>Find me in app/views/recipes/index.html.erb</p>
+<h1>My Recipes</h1>
+
+<% if @recipes.any? %>
+  <% @recipes.each do |recipe| %>
+    <div>
+      <%= link_to recipe.name, recipe_path(recipe) %>
+      <!-- Add any additional details you want to display -->
+    </div>
+  <% end %>
+<% else %>
+  <p>No recipes yet. <%= link_to 'Create a new recipe', new_recipe_path %></p>
+<% end %>
