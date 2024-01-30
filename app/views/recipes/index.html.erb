@@ -1,0 +1,18 @@
+<h1>My Recipes</h1>
+
+<% if @recipes.any? %>
+  <% @recipes.each do |recipe| %>
+    <ul>
+      <li>
+        <div>
+          <%= link_to recipe.name, recipe_path(recipe) %>
+          <p><%= recipe.description %></p>
+          <%= button_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </div>
+      </li>
+    </ul>
+  <% end %>
+  <p><%= link_to 'Create a new recipe', new_recipe_path %></p>
+<% else %>
+  <p>No recipes yet. <%= link_to 'Create a new recipe', new_recipe_path %></p>
+<% end %>
