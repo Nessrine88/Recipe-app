@@ -1,6 +1,6 @@
 <div id="<%= dom_id inventory %>">
   <p>
     <%= link_to inventory.name, inventory_path(inventory) %>
-  
+    <%= button_to "Remove", @inventory, method: :delete %>
   </p>
 </div>

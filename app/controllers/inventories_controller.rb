@@ -1,9 +1,10 @@
 class InventoriesController < ApplicationController
-  before_action :set_inventory, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_inventory, only: %i[show edit destroy]
 
   # GET /inventories or /inventories.json
   def index
-    @inventories = Inventory.all
+    @inventories = current_user.inventories
   end
 
   # GET /inventories/1 or /inventories/1.json
@@ -12,7 +13,7 @@ class InventoriesController < ApplicationController
 
   # GET /inventories/new
   def new
-    @inventory = Inventory.new
+    @inventory = current_user.inventories.build
   end
 
   # GET /inventories/1/edit
@@ -21,7 +22,7 @@ class InventoriesController < ApplicationController
 
   # POST /inventories or /inventories.json
   def create
-    @inventory = Inventory.new(inventory_params)
+    @inventory = current_user.inventories.build(inventory_params)
 
     respond_to do |format|
       if @inventory.save
@@ -29,19 +30,6 @@ class InventoriesController < ApplicationController
         format.json { render :show, status: :created, location: @inventory }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @inventory.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /inventories/1 or /inventories/1.json
-  def update
-    respond_to do |format|
-      if @inventory.update(inventory_params)
-        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully updated." }
-        format.json { render :show, status: :ok, location: @inventory }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @inventory.errors, status: :unprocessable_entity }
       end
     end
@@ -58,13 +46,13 @@ class InventoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_inventory
-      @inventory = Inventory.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_inventory
+    @inventory = Inventory.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def inventory_params
-      params.require(:inventory).permit(:name, :reference, :user_id)
-    end
+  # Only allow a list of trusted parameters through.
+  def inventory_params
+    params.require(:inventory).permit(:name, :reference, :user_id)
+  end
 end
