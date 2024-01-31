@@ -8,8 +8,7 @@ class InventoriesController < ApplicationController
   end
 
   # GET /inventories/1 or /inventories/1.json
-  def show
-  end
+  def show; end
 
   # GET /inventories/new
   def new
@@ -17,8 +16,7 @@ class InventoriesController < ApplicationController
   end
 
   # GET /inventories/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /inventories or /inventories.json
   def create
@@ -26,7 +24,7 @@ class InventoriesController < ApplicationController
 
     respond_to do |format|
       if @inventory.save
-        format.html { redirect_to inventory_url(@inventory), notice: "Inventory was successfully created." }
+        format.html { redirect_to inventory_url(@inventory), notice: 'Inventory was successfully created.' }
         format.json { render :show, status: :created, location: @inventory }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,15 +35,16 @@ class InventoriesController < ApplicationController
 
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
-    @inventory.destroy!
+    @inventory.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventories_url, notice: "Inventory was successfully destroyed." }
+      format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_inventory
     @inventory = Inventory.find(params[:id])
