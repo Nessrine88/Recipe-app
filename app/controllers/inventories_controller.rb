@@ -2,9 +2,10 @@ class InventoriesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_inventory, only: %i[show edit destroy]
 
+
   # GET /inventories or /inventories.json
   def index
-    @inventories = current_user.inventories
+    @inventories = Inventory.all
   end
 
   # GET /inventories/1 or /inventories/1.json
