@@ -22,7 +22,9 @@
             </div>
           </td>
           <td>
-            <%= link_to 'Delete', inventory_inventory_food_path(@inventory, inventory_food), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+            <%= form_with model: inventory_food, url: inventory_inventory_food_path(@inventory, inventory_food), method: :delete, local: false do |f| %>
+              <%= f.submit "Delete Food", class: "btn btn-danger" %>
+            <% end %>
           </td>
         </tr>
       <% end %>
