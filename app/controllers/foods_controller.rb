@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  before_action :set_inventory, only: [:new, :create]
+  before_action :set_inventory, only: %i[new create]
 
   def new
     @inventory = Inventory.find(params[:inventory_id])
@@ -11,7 +11,7 @@ class FoodsController < ApplicationController
     @food.inventory_id = params[:inventory_id]
 
     if @food.save
-      inventory_food = @inventory.inventory_foods.create(food_id: @food.id, quantity: params[:food][:quantity])
+      @inventory.inventory_foods.create(food_id: @food.id, quantity: params[:food][:quantity])
       redirect_to @inventory, notice: 'Food was successfully created.'
     else
       render :new
