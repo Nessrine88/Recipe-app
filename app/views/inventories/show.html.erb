@@ -1,7 +1,9 @@
-<div class="container mt-3">
-  <p style="color: green"><%= notice %></p>
+<!-- app/views/inventories/show.html.erb -->
 
-  <div class="border p-3">
-    <%= render @inventory %>
-  </div>
-</div>
+<h1><%= @inventory.name %></h1>
+
+
+
+<%= link_to 'Create Food', new_inventory_food_path(@inventory) %>
+
+<!-- ... other content ... -->

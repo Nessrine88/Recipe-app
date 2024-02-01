@@ -7,7 +7,11 @@ class InventoriesController < ApplicationController
   end
 
   # GET /inventories/1 or /inventories/1.json
-  def show; end
+  def show
+    @inventory = Inventory.find(params[:id])
+    @inventory_foods = @inventory.inventory_foods.includes(:food)
+    render 'inventory_foods/index', locals: { inventory: @inventory }
+  end
 
   # GET /inventories/new
   def new

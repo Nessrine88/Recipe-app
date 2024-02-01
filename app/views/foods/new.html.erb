@@ -1,0 +1,7 @@
+<h1>Add Food to <%= @inventory.name %></h1>
+
+<%= render 'form', food: @food, inventory: @inventory %>
+
+<br>
+
+<%= link_to 'Back', inventory_path(@inventory), class: 'btn btn-primary' %>
