@@ -7,9 +7,11 @@ Rails.application.routes.draw do
 
   get 'public_recipes', to: 'recipes#public_recipes', as: :public_recipes
 
-  resources :recipes, except: [:update]
+  resources :recipes, except: [:update] do
+    resources :foods, only: [:new, :create, :destroy]
+  end
   resources :inventories, except: [:update] do
     resources :inventory_foods, only: [:index, :destroy]
-    resources :foods, only: [:new, :create]
+    resources :foods, only: [:new, :create, :destroy]
   end
 end

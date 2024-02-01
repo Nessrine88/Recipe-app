@@ -1,7 +1,16 @@
-<h1>Add Food to <%= @inventory.name %></h1>
 
-<%= render 'form', food: @food, inventory: @inventory %>
-
-<br>
+<% if @inventory %>
+  <h1>Add Food to <%= @inventory.name %></h1>
+  <%= render 'form', food: @food, inventory: @inventory %>
+  <br>
 
 <%= link_to 'Back', inventory_path(@inventory), class: 'btn btn-primary' %>
+<% else %>
+  <h1>Add Food to <%= @recipe.name %></h1>
+  <%= render 'form_recipe', food: @food, recipe: @recipe %>
+  <br>
+
+  <%= link_to 'Back', recipe_path(@recipe), class: 'btn btn-primary' %>
+<% end %>
+
+

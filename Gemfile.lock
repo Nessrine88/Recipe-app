@@ -90,6 +90,7 @@ GEM
       autoprefixer-rails (>= 9.1.0)
       popper_js (>= 2.11.8, < 3)
     builder (3.2.4)
+    cancancan (3.5.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -162,6 +163,8 @@ GEM
       net-protocol
     nio4r (2.7.0)
     nokogiri (1.16.0-x64-mingw-ucrt)
+      racc (~> 1.4)
+    nokogiri (1.16.0-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
@@ -296,11 +299,13 @@ GEM
 
 PLATFORMS
   x64-mingw-ucrt
+  x86_64-darwin-21
   x86_64-linux
 
 DEPENDENCIES
   bootsnap
   bootstrap (~> 5.3, >= 5.3.2)
+  cancancan
   capybara
   cssbundling-rails
   debug
