@@ -1,5 +1,5 @@
 class FoodsController < ApplicationController
-  before_action :set_inventory, only: [:create]
+  before_action :set_inventory, only: [:new, :create]
 
   def new
     @inventory = Inventory.find(params[:inventory_id])
@@ -7,17 +7,14 @@ class FoodsController < ApplicationController
   end
 
   def create
-    @inventory = Inventory.find(params[:inventory_id])
     @food = @inventory.foods.new(food_params)
-  
-    respond_to do |format|
-      if @food.save
-        format.html { redirect_to @inventory, notice: 'Food was successfully added to the inventory.' }
-        format.json { render :show, status: :created, location: @food }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @food.errors, status: :unprocessable_entity }
-      end
+    @food.inventory_id = params[:inventory_id]
+
+    if @food.save
+      inventory_food = @inventory.inventory_foods.create(food_id: @food.id, quantity: params[:food][:quantity])
+      redirect_to @inventory, notice: 'Food was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -28,7 +25,6 @@ class FoodsController < ApplicationController
   end
 
   def food_params
-    # Define the permitted parameters for creating a food item
-    params.require(:food).permit(:name, :other_attributes)
+    params.require(:food).permit(:name, :measurement_unit, :price)
   end
 end
