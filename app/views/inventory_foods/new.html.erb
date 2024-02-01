@@ -1,0 +1,6 @@
+<!-- app/views/inventory_foods/new.html.erb -->
+<h1>Add New Food to <%= @inventory.name %> Inventory</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', inventory_foods_path(@inventory), class: 'btn btn-secondary' %>
