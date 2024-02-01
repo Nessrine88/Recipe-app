@@ -1,20 +1,34 @@
 class FoodsController < ApplicationController
-  before_action :set_inventory, only: %i[new create]
-
   def new
-    @inventory = Inventory.find(params[:inventory_id])
+    if params.has_key?(:inventory_id)
+      @inventory = Inventory.find(params[:inventory_id])
+    else
+      @recipe = Recipe.find(params[:recipe_id])
+    end
     @food = Food.new
   end
 
   def create
-    @food = @inventory.foods.new(food_params)
-    @food.inventory_id = params[:inventory_id]
+    if params.has_key?(:inventory_id)
+      @inventory = Inventory.find(params[:inventory_id])
+      @food = @inventory.foods.new(food_params)
 
-    if @food.save
-      @inventory.inventory_foods.create(food_id: @food.id, quantity: params[:food][:quantity])
-      redirect_to @inventory, notice: 'Food was successfully created.'
+      if @food.save
+        @inventory.inventory_foods.create(food_id: @food.id, quantity: params[:food][:quantity])
+        redirect_to @inventory, notice: 'Food was successfully created.'
+      else
+        render :new
+      end
     else
-      render :new
+      @recipe = Recipe.find(params[:recipe_id])
+      @food = @recipe.foods.new(food_params)
+
+      if @food.save
+        @recipe.recipe_foods.create(food: @food, quantity: params[:food][:quantity])
+        redirect_to @recipe, notice: 'Food was successfully created.'
+      else
+        render :new
+      end
     end
   end
 
