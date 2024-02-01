@@ -23,7 +23,7 @@ class InventoriesController < ApplicationController
 
     respond_to do |format|
       if @inventory.save
-        format.html { redirect_to inventory_url(@inventory), notice: 'Inventory was successfully created.' }
+        format.html { redirect_to inventory_url(@inventory)}
         format.json { render :show, status: :created, location: @inventory }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -37,7 +37,7 @@ class InventoriesController < ApplicationController
     @inventory.destroy
 
     respond_to do |format|
-      format.html { redirect_to inventories_url, notice: 'Inventory was successfully destroyed.' }
+      format.html { redirect_to inventories_url}
       format.json { head :no_content }
     end
   end
@@ -51,6 +51,6 @@ class InventoriesController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def inventory_params
-    params.require(:inventory).permit(:name, :reference, :user_id)
+    params.require(:inventory).permit(:name,:description, :reference, :user_id)
   end
 end

@@ -1,9 +1,12 @@
-<div id="<%= dom_id inventory %>">
-  <p>
+<div  class="d-flex justify-content-between align-items-center">
     <%= link_to inventory.name, inventory_path(inventory) %>
-    <% if current_user %>
-  <%= button_to "Remove", @inventory, method: :delete, class: "btn btn-danger mt-3", data: { confirm: "Are you sure?" } %>
-<% end %>
-
+  <p class="mx-auto w-50">
+    <%= inventory.description %>
   </p>
+</div>
+    <% if current_user %>
+      <%= button_to "Remove", @inventory, method: :delete, class: "btn btn-danger mt-3", data: { confirm: "Are you sure?" } %>
+    <%else%>
+      <% %>
+      <% end %>
 </div>
