@@ -1,0 +1,11 @@
+<h1>Public Recipes</h1>
+
+<% @public_recipes.each do |recipe| %>
+  <div class="public_recipe_list">
+    <div>
+      <h3><%= link_to recipe.name, recipe_path(recipe, recipe) %></h3>
+      <p>By: <%= recipe.user.name %></p>
+    </div>
+  </div>
+  <hr>
+<% end %>
