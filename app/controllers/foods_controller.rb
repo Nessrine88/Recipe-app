@@ -32,6 +32,26 @@ class FoodsController < ApplicationController
     end
   end
 
+  def destroy
+    if params.has_key?(:inventory_id)
+      @inventory = Inventory.find(params[:inventory_id])
+      @food = Food.find(params[:id])
+      @inventory_food = InventoryFood.where(food: @food, inventory: @inventory)
+      @inventory_food.delete_all
+      @food.delete
+      redirect_to @inventory, notice: 'Food was successfully destroyed.'
+
+    else
+      @recipe = Recipe.find(params[:recipe_id])
+      @food = Food.find(params[:id])
+      @recipe_food = RecipeFood.where(food: @food, recipe: @recipe)
+      @recipe_food.delete_all
+      @food.delete
+      redirect_to @recipe, notice: 'Food was successfully destroyed.'
+
+    end
+  end
+
   private
 
   def set_inventory
