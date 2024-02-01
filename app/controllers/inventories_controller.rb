@@ -10,6 +10,7 @@ class InventoriesController < ApplicationController
   def show
     @inventory = Inventory.find(params[:id])
     @inventory_foods = @inventory.inventory_foods.includes(:food)
+    render 'inventory_foods/index', locals: { inventory: @inventory }
   end
 
   # GET /inventories/new
