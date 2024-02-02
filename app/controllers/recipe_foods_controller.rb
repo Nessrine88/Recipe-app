@@ -1,32 +1,28 @@
+# app/controllers/recipe_foods_controller.rb
 class RecipeFoodsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_recipe
 
-  def new
-    @recipe_food = RecipeFood.new
-    @foods = Food.all
+  def new 
+    @recipe_food = RecipeFood.new()
   end
 
   def create
-    @recipe = Recipe.find(params[:id])
-    @recipe_food = @recipe.recipe_foods.build(recipe_food_params)
-  
+    @recipe_food = @recipe.recipe_foods.new(recipe_food_params)
+
     if @recipe_food.save
-      redirect_to recipe_path(@recipe), notice: 'Ingredient added successfully.'
+      redirect_to recipe_path(@recipe), notice: 'Food was successfully created.'
     else
-      flash[:alert] = @recipe_food.errors.full_messages.join(", ")
-      render :new
+      render:new
     end
   end
-  
 
   private
 
   def set_recipe
-    @recipes = Recipe.find(params[:recipe_id])
+    @recipe = Recipe.find(params[:recipe_id])
   end
 
   def recipe_food_params
-    params.require(:recipe_food).permit(:food_id,:price, :quantity)
+    params.require(:recipe_food).permit(:food_id,:name, :quantity)
   end
 end

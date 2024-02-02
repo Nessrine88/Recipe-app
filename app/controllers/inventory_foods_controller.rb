@@ -1,9 +1,8 @@
 # app/controllers/inventory_foods_controller.rb
 class InventoryFoodsController < ApplicationController
-  before_action :set_inventory
-  before_action :set_inventory_food, only: [:edit, :update, :destroy]
-
+ 
   def index
+    @inventory = Inventory.find(params[:inventory_id])
     @inventory_foods = @inventory.inventory_foods
   end
 
