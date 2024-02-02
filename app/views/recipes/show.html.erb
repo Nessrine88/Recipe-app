@@ -28,7 +28,7 @@
   <% end %>
 </div>
 <div class="d-block mx-auto w-75">
-<% if current_user.id == @recipe.user_id || @recipe.public %>
+
 <table class="table ">
   <thead>
     <tr>
@@ -44,15 +44,19 @@
       <td> <%= recipe_food.food.name %> </td>
       <td><%= recipe_food.quantity %></td>
       <td><%= recipe_food.quantity * recipe_food.food.price %></td>
-      <td> <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
-        <%= f.hidden_field :food_id, value: "1" %>
-        <%= f.submit "Delete", class: "btn btn-danger" %>
-      <% end %></td>
+      <td>
+      <% if current_user.id == @recipe.user_id %>
+        <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
+          <%= f.hidden_field :food_id, value: "1" %>
+          <%= f.submit "Delete", class: "btn btn-danger" %>
+        <% end %>
+      <% end %>
+      </td>
     </tr>
     <% end %>
   </tbody>
 </table>
-<% end %>
+
 </div>
 </div>
 
