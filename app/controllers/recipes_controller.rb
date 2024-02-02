@@ -7,7 +7,8 @@ class RecipesController < ApplicationController
   end
 
   def show
-    # @recipe = Recipe.find(params[:id])
+    @recipe = Recipe.find(params[:id])
+    @recipe_foods = @recipe.recipe_foods
   end
 
   def new
@@ -25,6 +26,17 @@ class RecipesController < ApplicationController
 
   def edit; end
 
+  def public_recipes
+    @public_recipes = Recipe.where(public: true).order(created_at: :desc)
+    render 'public_recipes'
+  end
+
+  def toggle_recipe
+    @recipe = current_user.recipes.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+    redirect_to @recipe, notice: 'Recipe status toggled successfully.'
+  end
+
   def destroy
     @recipe.destroy
     redirect_to recipes_url, notice: 'Recipe was successfully deleted'
@@ -33,7 +45,13 @@ class RecipesController < ApplicationController
   private
 
   def set_recipe
-    @recipe = current_user.recipes.find(params[:id])
+    @recipe = if params[:id] == 'public_recipes'
+                # No need to find a recipe when displaying public recipes
+                nil
+              else
+                # Find the recipe by its id
+                current_user.recipes.find(params[:id])
+              end
   end
 
   def recipe_params
