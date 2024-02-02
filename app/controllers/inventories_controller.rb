@@ -39,8 +39,8 @@ class InventoriesController < ApplicationController
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
     inventory = Inventory.find(params[:id])
-inventory.inventory_foods.destroy_all
-inventory.destroy
+    inventory.inventory_foods.destroy_all
+    inventory.destroy
     respond_to do |format|
       format.html { redirect_to inventories_url }
       format.json { head :no_content }

@@ -12,8 +12,6 @@ class ShoppingListsController < ApplicationController
   def set_recipe_and_inventory
     @recipe = Recipe.find(params[:recipe_id])
     @inventory = Inventory.find(params[:inventory_id])
-  rescue ActiveRecord::RecordNotFound
-    handle_not_found
   end
 
   def generate_shopping_list
@@ -51,8 +49,5 @@ class ShoppingListsController < ApplicationController
     @total_price = @missing_food_items.sum { |item| item.quantity * item.food.price }
   end
 
-  def handle_not_found
-    flash[:error] = 'Recipe or inventory not found.'
-    redirect_to root_path
-  end
+  
 end

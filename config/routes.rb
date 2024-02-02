@@ -18,6 +18,8 @@ Rails.application.routes.draw do
     resources :foods, only: [:new, :create, :destroy]
   end
 
-  get '/shopping_lists', to: 'shopping_lists#index', as: 'shopping_lists'
+ # config/routes.rb
+resources :shopping_lists
+
  
 end
