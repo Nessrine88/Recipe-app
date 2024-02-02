@@ -1,20 +1,21 @@
-<h1>My Recipes</h1>
-
-<% if @recipes.any? %>
-  <% @recipes.each do |recipe| %>
-    <ul>
-      <li>
-        <div>
-          <%= link_to recipe.name, recipe_path(recipe) %>
-          <p><%= recipe.description %></p>
-          <%= button_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
-        </div>
-      </li>
-    </ul>
-  <% end %>
-  <p><%= link_to 'Create a new recipe', new_recipe_path %></p>
-<% else %>
-  <p>No recipes yet. <%= link_to 'Create a new recipe', new_recipe_path %></p>
-<% end %>
-
-<%= link_to 'Public Recipes', public_recipes_path %>
+<div class="recipe_list_container">
+  <h1>My Recipes</h1>
+  <ul class="recipe_list">
+    <% if @recipes.any? %>
+      <% @recipes.each do |recipe| %>
+        <li class="recipe">
+          <div>
+            <%= link_to recipe.name, recipe_path(recipe) %>
+            <%= button_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </div>
+          <div>
+            <p><%= recipe.description %></p>
+          </div>
+        </li>
+      <% end %>
+      <p><%= link_to 'Create a new recipe', new_recipe_path %></p>
+    <% else %>
+      <p>No recipes yet. <%= link_to 'Create a new recipe', new_recipe_path %></p>
+    <% end %>
+  </ul>
+</div>
