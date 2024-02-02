@@ -14,8 +14,10 @@
       <%= form_with model: @recipe, url: toggle_recipe_path(@recipe), method: :patch, local: true do |form| %>
         <%= form.hidden_field :public, value: !@recipe.public %>
         <label class="switch">
+          Public : 
           <div class="toggle_status_container">
-            <button type="submit" class="toggle-button <%= @recipe.public ? 'private' : 'public' %>"></button>
+            <input type="submit" class="btn-check toggle-button <%= @recipe.public ? 'private' : 'public' %>" id="btn-check-2-outlined" checked autocomplete="off">
+            <label id="label" class="btn btn-outline-secondary" for="btn-check-2-outlined"><%= @recipe.public %></label><br>
           </div>
         </label>
       <% end %>
@@ -31,33 +33,38 @@
 </div>
 
 <div class="d-block mx-auto w-75">
-  <% if current_user.id == @recipe.user_id %>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">Food</th>
-          <th scope="col">Quantity</th>
-          <th scope="col">Value</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @recipe_foods.each do |recipe_food| %>
-          <tr>
-            <td><%= recipe_food.food.name %></td>
-            <td><%= recipe_food.quantity %></td>
-            <td><%= recipe_food.quantity * recipe_food.food.price %></td>
-            <td>
-              <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
-                <%= f.hidden_field :food_id, value: "1" %>
-                <%= f.submit "Delete", class: "btn btn-danger" %>
-              <% end %>
-            </td>
-          </tr>
+
+<table class="table ">
+  <thead>
+    <tr>
+      <th scope="col">Food</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Value</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @recipe_foods.each do |recipe_food| %>
+    <tr>
+      <td> <%= recipe_food.food.name %> </td>
+      <td><%= recipe_food.quantity %></td>
+      <td><%= recipe_food.quantity * recipe_food.food.price %></td>
+      <td>
+      <% if current_user.id == @recipe.user_id %>
+        <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
+          <%= f.hidden_field :food_id, value: "1" %>
+          <%= f.submit "Delete", class: "btn btn-danger" %>
         <% end %>
-      </tbody>
-    </table>
-  <% end %>
+      <% end %>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+</div>
+</div>
+
 </div>
 
 <div class="w-50 bg-light hauteur border border-1 position-absolute top-50 start-50 translate-middle ps-3" id="hide">
@@ -76,25 +83,12 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+  let label = document.querySelector('#label');
   let btn = document.querySelector('#gen');
   let genBlock = document.querySelector('#hide');
   btn.addEventListener('click', () => {
-    genBlock.style.display = 'block';
-  });
+    gen_block.style.display = 'block';
+  })
 
-  let closeIcon = document.querySelector('#close-popup');
-  closeIcon.addEventListener('click', () => {
-    genBlock.style.display = 'none';
-  });
-
-  var generate = document.querySelector('#generate-button');
-  generate.addEventListener('click', () => {
-    var selectedInventory = document.getElementById('select-inventory');
-    var selectedInventoryId = selectedInventory.value;
-    var shoppingListUrl = "<%= shopping_lists_path %>";
-    var modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=<%= @recipe.id %>';
-    window.location.href = modifiedUrl;
-  });
-  });
 </script>
 
