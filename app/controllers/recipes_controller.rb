@@ -45,13 +45,13 @@ class RecipesController < ApplicationController
   private
 
   def set_recipe
-    if params[:id] == "public_recipes"
-      # No need to find a recipe when displaying public recipes
-      @recipe = nil
-    else
-      # Find the recipe by its id
-      @recipe = current_user.recipes.find(params[:id])
-    end
+    @recipe = if params[:id] == 'public_recipes'
+                # No need to find a recipe when displaying public recipes
+                nil
+              else
+                # Find the recipe by its id
+                current_user.recipes.find(params[:id])
+              end
   end
 
   def recipe_params

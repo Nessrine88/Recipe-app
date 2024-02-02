@@ -1,6 +1,6 @@
 class FoodsController < ApplicationController
   def new
-    if params.has_key?(:inventory_id)
+    if params.key?(:inventory_id)
       @inventory = Inventory.find(params[:inventory_id])
     else
       @recipe = Recipe.find(params[:recipe_id])
@@ -9,7 +9,7 @@ class FoodsController < ApplicationController
   end
 
   def create
-    if params.has_key?(:inventory_id)
+    if params.key?(:inventory_id)
       @inventory = Inventory.find(params[:inventory_id])
       @food = @inventory.foods.new(food_params)
 
@@ -33,7 +33,7 @@ class FoodsController < ApplicationController
   end
 
   def destroy
-    if params.has_key?(:inventory_id)
+    if params.key?(:inventory_id)
       @inventory = Inventory.find(params[:inventory_id])
       @food = Food.find(params[:id])
       @inventory_food = InventoryFood.where(food: @food, inventory: @inventory)
