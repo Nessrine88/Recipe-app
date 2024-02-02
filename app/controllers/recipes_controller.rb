@@ -31,6 +31,12 @@ class RecipesController < ApplicationController
     render 'public_recipes'
   end
 
+  def toggle_recipe
+    @recipe = current_user.recipes.find(params[:id])
+    @recipe.update(public: !@recipe.public)
+    redirect_to @recipe, notice: 'Recipe status toggled successfully.'
+  end
+
   def destroy
     @recipe.destroy
     redirect_to recipes_url, notice: 'Recipe was successfully deleted'
