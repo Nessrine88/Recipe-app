@@ -25,7 +25,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_01_183209) do
   create_table "inventories", force: :cascade do |t|
     t.string "name"
     t.text "description"
-    t.string "reference"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

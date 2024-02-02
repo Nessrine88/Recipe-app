@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+ devise_for :users
   get 'up' => 'rails/health#show', as: :rails_health_check
 
   # Defines the root path route ('/')
@@ -17,4 +17,9 @@ Rails.application.routes.draw do
     resources :inventory_foods, only: [:index, :destroy]
     resources :foods, only: [:new, :create, :destroy]
   end
+
+ # config/routes.rb
+resources :shopping_lists
+
+ 
 end
