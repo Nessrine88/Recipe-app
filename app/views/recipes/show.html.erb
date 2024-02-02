@@ -10,8 +10,10 @@
       <%= form_with model: @recipe, url: toggle_recipe_path(@recipe), method: :patch, local: true do |form| %>
         <%= form.hidden_field :public, value: !@recipe.public %>
         <label class="switch">
+          Public : 
           <div class="toggle_status_container">
-            <button type="submit" class="toggle-button <%= @recipe.public ? 'private' : 'public' %>"></button>
+            <input type="submit" class="btn-check toggle-button <%= @recipe.public ? 'private' : 'public' %>" id="btn-check-2-outlined" checked autocomplete="off">
+            <label id="label" class="btn btn-outline-secondary" for="btn-check-2-outlined"><%= @recipe.public %></label><br>
           </div>
         </label>
       <% end %>
@@ -26,7 +28,7 @@
   <% end %>
 </div>
 <div class="d-block mx-auto w-75">
-<% if current_user.id == @recipe.user_id %>
+<% if current_user.id == @recipe.user_id || @recipe.public %>
 <table class="table ">
   <thead>
     <tr>
@@ -69,6 +71,7 @@
 </div>
 
 <script>
+  let label = document.querySelector('#label');
   let btn = document.querySelector('#gen');
   let gen_block = document.querySelector('#hide');
   btn.addEventListener('click', () => {

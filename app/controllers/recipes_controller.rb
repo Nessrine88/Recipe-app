@@ -1,6 +1,5 @@
 class RecipesController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_recipe, only: %i[show edit destroy]
 
   def index
     @recipes = current_user.recipes

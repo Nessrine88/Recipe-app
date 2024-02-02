@@ -12,13 +12,28 @@
   </head>
 
   <body>
-    <nav>
-      <ul>
-        <li><%= link_to "Home", root_path %></li>
-        <li><%= link_to "Recipe List", recipes_path %></li>
-        <li><%= link_to 'Public Recipes', public_recipes_path %></li>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= root_path %>">Home</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="<%= recipes_path %>"> Recipe List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= public_recipes_path %>"> Public Recipe</a>
+        </li>
+       <li class="nav-item">
+          <a class="nav-link" href="<%= inventories_path %>"> Inventory list</a>
+        </li>
       </ul>
-    </nav>
+    </div>
+  </div>
+</nav>
+    
     <p class="notice"><%= notice %> <%= alert %></p>
     <%= yield %>
   </body>
