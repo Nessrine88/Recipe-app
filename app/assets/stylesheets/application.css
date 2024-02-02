@@ -13,3 +13,29 @@
  *= require_tree .
  *= require_self
  */
+
+
+.public_recipes_container {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.public_recipes_container h1 {
+	text-align: center;
+}
+
+.public_recipe_list {
+	border: 1px solid black;
+	margin-bottom: 10px;
+	display: flex;
+	flex-direction: row;
+	padding: 10px;
+}
+
+.public_recipe_list > div {
+	width: 100%;
+}
+
+.public_recipe_list p {
+	margin-bottom: 0;
+}
