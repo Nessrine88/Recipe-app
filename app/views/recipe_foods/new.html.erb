@@ -1,0 +1,17 @@
+<div class="container mt-4">
+  <%= form_with model: RecipeFood do |f| %>
+    <div class="form-group">
+      <%= f.label :food_id, class: "d-block label" %>
+      <%= f.collection_select :food_id, Food.all, :id, :name, { prompt: 'Select Food' }, class: 'form-control select-field' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :quantity, class: "d-block label" %>
+      <%= f.number_field :quantity, class: 'form-control quantity-field' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit 'Submit', class: 'btn btn-primary submit-button' %>
+    </div>
+  <% end %>
+</div>

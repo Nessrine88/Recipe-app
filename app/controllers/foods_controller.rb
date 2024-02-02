@@ -1,4 +1,8 @@
 class FoodsController < ApplicationController
+
+  def index
+    @foods= Food.all
+  end 
   def new
     if params.key?(:inventory_id)
       @inventory = Inventory.find(params[:inventory_id])
