@@ -46,10 +46,10 @@
       <td><%= recipe_food.quantity * recipe_food.food.price %></td>
       <td>
       <% if current_user.id == @recipe.user_id %>
-       <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
-        <%= f.hidden_field :food_id, value: "1" %>
-        <%= f.submit "Delete", class: "btn btn-danger" %>
-      <% end %>
+        <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
+          <%= f.hidden_field :food_id, value: "1" %>
+          <%= f.submit "Delete", class: "btn btn-danger" %>
+        <% end %>
       <% end %>
       </td>
     </tr>
