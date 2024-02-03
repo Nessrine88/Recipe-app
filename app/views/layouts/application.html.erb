@@ -29,6 +29,7 @@
        <li class="nav-item">
           <a class="nav-link" href="<%= inventories_path %>"> Inventory list</a>
         </li>
+        <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: 'logout')  %>
       </ul>
     </div>
   </div>
