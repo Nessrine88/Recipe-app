@@ -7,18 +7,21 @@ Rails.application.routes.draw do
 
   get 'public_recipes', to: 'recipes#public_recipes', as: :public_recipes
 
+  resources :foods, only: [:new, :create, :destroy]
+
   resources :recipes, except: [:update] do
-    resources :recipe_foods, only: [:new, :create]
     member do
       patch 'toggle', to: 'recipes#toggle_recipe'
     end
-    resources :foods, only: [:index, :new, :create, :destroy]
+    resources :recipe_foods, only: [:new,:create, :index, :destroy]
   end
   resources :inventories, except: [:update] do
-    resources :inventory_foods, only: [:index,:new,:create, :destroy]
-    resources :foods, only: [:new, :create, :destroy]
+    resources :inventory_foods, only: [:new,:create, :index, :destroy]
+    
   end
 
-  get '/shopping_lists', to: 'shopping_lists#index', as: 'shopping_lists'
+  resources :shopping_lists, only: [:index, :create]
+
+  get '/shopping_lists/default', to: 'shopping_lists#default', as: :default_shopping_lists
  
 end

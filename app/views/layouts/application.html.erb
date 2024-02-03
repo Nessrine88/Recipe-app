@@ -14,7 +14,7 @@
   <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="<%= root_path %>">Home</a>
+    <a class="navbar-brand" href="<%= root_path %>"><%image_tag'logo.jpg'%></a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -29,7 +29,11 @@
        <li class="nav-item">
           <a class="nav-link" href="<%= inventories_path %>"> Inventory list</a>
         </li>
-        <%= button_to("Log Out", destroy_user_session_path, method: :delete, class: 'logout')  %>
+
+        <li class="nav-item">
+          <a class="nav-link" href="<%= new_food_path %>"> New food</a>
+        </li>
+
       </ul>
     </div>
   </div>

@@ -25,12 +25,14 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-between w-75 d-block mx-auto">
-  <button class="btn btn-warning" id="gen">Generate shopping list</button>
-  <% if current_user.id == @recipe.user_id %>
-    <%= link_to "Add ingredient", new_recipe_food_path(@recipe), class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<turbo-frame id="shopping-list-frame">
+    <div class="d-flex justify-content-between w-75 d-block mx-auto">
+      <button class="btn btn-warning" id="gen">Generate shopping list</button>
+      <% if current_user.id == @recipe.user_id %>
+        <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </turbo-frame>
 
 <div class="d-block mx-auto w-75">
 
@@ -51,7 +53,7 @@
       <td><%= recipe_food.quantity * recipe_food.food.price %></td>
       <td>
       <% if current_user.id == @recipe.user_id %>
-        <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
+        <%= form_with model: recipe_food, url: recipe_recipe_food_path(@recipe.id, recipe_food.id), method: :delete, local: false do |f| %>
           <%= f.hidden_field :food_id, value: "1" %>
           <%= f.submit "Delete", class: "btn btn-danger" %>
         <% end %>
@@ -68,10 +70,10 @@
 </div>
 
 <div class="w-50 bg-light hauteur border border-1 position-absolute top-50 start-50 translate-middle ps-3" id="hide">
-<span id="close-popup" class="close-icon float-right">&times;</span>
+<div id="close-popup" class="close-icon cursor-pointer m-3" align= "right">&times;</div>
 <h2 class="text-center text-secondary mb-3">Generating Shopping List</h2>
   <h5 class="mt-3 mb-3">Choose an inventory to use</h5>
-  <%= form_with model: @recipe, url: shopping_lists_path, local: false do |f| %>
+  <%= form_with model: @recipe, url: shopping_lists_path, local: false, remote: true, html: { id: 'generate-form', method: :post } do |f| %>
     <div class="input-group mb-3 w-75">
       <%= f.label :inventory_id, class: "input-group-text", for: "select-inventory" %>
       <%= f.select :inventory_id, @inventories.order(:name).map { |inventory| [inventory.name, inventory.id] }, {}, { class: "form-control", id: "select-inventory" } %>
@@ -82,13 +84,30 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  let label = document.querySelector('#label');
+
+document.addEventListener('turbo:load', function() {
   let btn = document.querySelector('#gen');
   let genBlock = document.querySelector('#hide');
+
   btn.addEventListener('click', () => {
-    gen_block.style.display = 'block';
-  })
+    genBlock.style.display = 'block';
+  });
 
+  let closeIcon = document.querySelector('#close-popup');
+  closeIcon.addEventListener('click', () => {
+    genBlock.style.display = 'none';
+  });
+
+  let generateButton = document.querySelector('#generate-button');
+  if (generateButton) {
+    generateButton.addEventListener('click', () => {
+      let selectedInventory = document.getElementById('select-inventory');
+      let selectedInventoryId = selectedInventory.value;
+      let shoppingListUrl = "<%= shopping_lists_path %>";
+      let modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=' + <%= @recipe.id %>;
+
+      Turbo.visit(modifiedUrl, { action: "replace" });
+    });
+  }
+});
 </script>
-

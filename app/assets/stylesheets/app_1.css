@@ -5,3 +5,11 @@
 #hide {
   display: none;
 }
+
+#close-popup {
+  cursor: pointer;
+}
+
+#close-popup:hover {
+  cursor: pointer;
+}

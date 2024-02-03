@@ -4,35 +4,15 @@ class FoodsController < ApplicationController
   end
 
   def new
-    if params.key?(:inventory_id)
-      @inventory = Inventory.find(params[:inventory_id])
-    else
-      @recipe = Recipe.find(params[:recipe_id])
-    end
     @food = Food.new
   end
 
   def create
-    if params.key?(:inventory_id)
-      @inventory = Inventory.find(params[:inventory_id])
-      @food = @inventory.foods.new(food_params)
-
-      if @food.save
-        @inventory.inventory_foods.create(food_id: @food.id, quantity: params[:food][:quantity])
-        redirect_to @inventory, notice: 'Food was successfully created.'
-      else
-        render :new
-      end
+    @food = Food.new(food_params)
+    if @food.save
+      redirect_to root_path, notice: 'Food was successfully created.'
     else
-      @recipe = Recipe.find(params[:recipe_id])
-      @food = @recipe.foods.new(food_params)
-
-      if @food.save
-        @recipe.recipe_foods.create(food: @food, quantity: params[:food][:quantity])
-        redirect_to @recipe, notice: 'Food was successfully created.'
-      else
-        render :new
-      end
+      render :new
     end
   end
 
