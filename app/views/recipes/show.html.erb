@@ -23,14 +23,18 @@
   <% end %>
 </div>
 
-<turbo-frame id="shopping-list-frame">
+
     <div class="d-flex justify-content-between w-75 d-block mx-auto">
       <button class="btn btn-warning" id="gen">Generate shopping list</button>
+      
+      
       <% if current_user.id == @recipe.user_id %>
-        <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-primary' %>
-      <% end %>
+      <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-primary' %>
+    <% end %>
+  
+
     </div>
-  </turbo-frame>
+ 
 
 <div class="d-block mx-auto w-75">
 
