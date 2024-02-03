@@ -28,7 +28,7 @@
 <div class="d-flex justify-content-between w-75 d-block mx-auto">
   <button class="btn btn-warning" id="gen">Generate shopping list</button>
   <% if current_user.id == @recipe.user_id %>
-    <%= link_to "Add ingredient", new_recipe_food_path(@recipe), class: 'btn btn-primary' %>
+    <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-primary' %>
   <% end %>
 </div>
 
@@ -51,7 +51,7 @@
       <td><%= recipe_food.quantity * recipe_food.food.price %></td>
       <td>
       <% if current_user.id == @recipe.user_id %>
-        <%= form_with model: recipe_food.food, url: recipe_food_path(@recipe.id, recipe_food.food.id), method: :delete, local: false do |f| %>
+        <%= form_with model: recipe_food, url: recipe_recipe_food_path(@recipe.id, recipe_food.id), method: :delete, local: false do |f| %>
           <%= f.hidden_field :food_id, value: "1" %>
           <%= f.submit "Delete", class: "btn btn-danger" %>
         <% end %>
@@ -85,10 +85,10 @@
 document.addEventListener('DOMContentLoaded', function() {
   let label = document.querySelector('#label');
   let btn = document.querySelector('#gen');
-  let genBlock = document.querySelector('#hide');
+  let gen_block = document.querySelector('#hide');
   btn.addEventListener('click', () => {
     gen_block.style.display = 'block';
-  })
-
+  });
+});
 </script>
 
