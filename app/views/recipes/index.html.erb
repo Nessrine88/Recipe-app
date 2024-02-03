@@ -1,5 +1,5 @@
 <div class="recipe_list_container">
-  <h1>My Recipes</h1>
+  <h1 align="center">My Recipes</h1>
   <ul class="recipe_list">
     <% if @recipes.any? %>
       <% @recipes.each do |recipe| %>
@@ -15,7 +15,7 @@
       <% end %>
       <p><%= link_to 'Create a new recipe', new_recipe_path %></p>
     <% else %>
-      <p>No recipes yet. <%= link_to 'Create a new recipe', new_recipe_path %></p>
+      <p >No recipes yet.<br> <%= link_to 'Create a new recipe', new_recipe_path %></p>
     <% end %>
   </ul>
 </div>
