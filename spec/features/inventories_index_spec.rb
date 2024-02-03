@@ -8,7 +8,7 @@ RSpec.feature 'Inventories Index Page', type: :feature do
   let(:inventories) { [inventory1, inventory2] }
 
   before do
-    login_as(user, scope: :user) # Log in the user using Devise
+    login_as(user, scope: :user)
     visit inventories_path
   end
 
