@@ -3,7 +3,7 @@ class InventoryFoodsController < ApplicationController
   before_action :set_inventory_food, only: [:destroy]
 
   def index
-    @inventory_foods = InventoryFood.where(inventory_id: @inventory.id)
+    @inventory_foods = InventoryFood.includes(:food).where(inventory_id: @inventory.id)
   end
 
   def new
