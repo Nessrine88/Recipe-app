@@ -16,16 +16,16 @@
       <tbody>
         <% @missing_food_items.each do |item| %>
           <tr>
-            <td><%= item.food.name %></td>
-            <td><%= item.quantity %></td>
-            <td><%= item.quantity * item.food.price %></td>
+          <td><%= Food.find(item.food_id).name %></td>
+          <td><%= item.quantity %></td>
+          <td><%= Food.find(item.food_id).price %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
 
-    <p class="col-xs-1" align="center">Total Amount of Food to Buy: <%= @total_food_items %></p>
-    <p class="col-xs-1" align="center">Total Value of Food Needed: $<%= @total_price %></p>
+    <p class="col-xs-1" align="center">Amount of food to buy: <%= @missing_food_items.map { |item| item.quantity }.sum %></p>
+    <p class="col-xs-1" align="center">Total value of food needed: $<%= @missing_food_items.map { |item| item.quantity * item.food.price }.sum %></p>
   <% else %>
     <p>No missing items. Your inventory is well-stocked!</p>
   <% end %>

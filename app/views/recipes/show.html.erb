@@ -71,7 +71,7 @@
 <span id="close-popup" class="close-icon float-right">&times;</span>
 <h2 class="text-center text-secondary mb-3">Generating Shopping List</h2>
   <h5 class="mt-3 mb-3">Choose an inventory to use</h5>
-  <%= form_with model: @recipe, url: shopping_lists_path, local: false, remote: true do |f| %>
+  <%= form_with model: @recipe, url: shopping_lists_path, local: false, remote: true, html: { id: 'generate-form', method: :post } do |f| %>
     <div class="input-group mb-3 w-75">
       <%= f.label :inventory_id, class: "input-group-text", for: "select-inventory" %>
       <%= f.select :inventory_id, @inventories.order(:name).map { |inventory| [inventory.name, inventory.id] }, {}, { class: "form-control", id: "select-inventory" } %>
