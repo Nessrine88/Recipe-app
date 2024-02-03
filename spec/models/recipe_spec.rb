@@ -1,6 +1,9 @@
-# spec/models/recipe_spec.rb
-
 require 'rails_helper'
+require 'factory_bot_rails'
+
+RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+end
 
 RSpec.describe Recipe, type: :model do
   describe 'validations' do
