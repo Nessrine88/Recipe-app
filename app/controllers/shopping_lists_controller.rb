@@ -61,3 +61,4 @@ class ShoppingListsController < ApplicationController
 
   end
 end
+end
