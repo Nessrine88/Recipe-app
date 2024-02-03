@@ -21,7 +21,6 @@ Rails.application.routes.draw do
   end
 
  # config/routes.rb
-resources :shopping_lists
-
- 
+  get 'shopping_list', to:'recipes#shopping_list'
+  
 end

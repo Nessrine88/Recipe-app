@@ -42,7 +42,43 @@ class RecipesController < ApplicationController
     redirect_to recipes_url, notice: 'Recipe was successfully deleted'
   end
 
+  def shopping_list
+    set_recipe_and_inventory
+    @total = 0
+    @diff = miss_food
+  end
+
+  def miss_food
+    @food_recipe_array = @recipe.recipe_foods
+    @food_inventory_array = @inventory.inventory_foods
+    @food_id_inv = []
+    @food_inventory_array.each do |f|
+      @food_id_inv.push(f.food_id)
+    end
+
+    @diff_food = []
+    @food_recipe_array.each do |food_recipe|
+      if @food_id_inv.include?(food_recipe.food_id)
+
+        idx = @food_id_inv.find_index(food_recipe.food_id)
+        elt = @food_inventory_array[idx]
+        quantit = food_recipe.quantity - elt.quantity
+        @diff_food.push({ food_id: food_recipe.food_id, quantity: quantit })
+      else
+        @diff_food.push({ food_id: food_recipe.food_id, quantity: food_recipe.quantity })
+      end
+    end
+  end
+
   private
+
+  def set_recipe_and_inventory
+    @recipe = Recipe.find(params[:format])
+    @inventory = Inventory.find(params[:recipe][:inventory_id])
+  end
+
+  
+  
 
   def set_recipe
     @recipe = if params[:id] == 'public_recipes'

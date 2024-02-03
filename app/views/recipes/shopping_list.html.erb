@@ -1,0 +1,30 @@
+<!-- app/views/shopping_lists/index.html.erb -->
+<h1 class="col-xs-1" align="center">Shopping List</h1>
+
+<% if @recipe && @inventory %>
+  <h2>Recipe: <%= @recipe.name %></h2>
+  <h2>Inventory: <%= @inventory.name %></h2>
+  
+ 
+ <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Food</th>
+          <th>Quantity</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @diff_food.each do |item| %>
+          <tr>
+            <td><%= Food.find(item[:food_id].to_i).name %></td>
+            <td><%= item[:quantity] %></td>
+            <td><%= item[:quantity] * Food.find(item[:food_id].to_i).price%></td> 
+                <% @total += item[:quantity] * Food.find(item[:food_id].to_i).price%>
+          </tr>
+        <% end %>
+      </tbody>
+  </table>
+    <h1 class="text-secondary text-center"> Total value of food needed : <%= @total %> </h1>
+<% end %>
+  
