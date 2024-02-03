@@ -1,3 +1,4 @@
+
 <!-- app/views/foods/_form.html.erb -->
 
 <%= form_with(model: food, url: inventory_foods_path(@inventory), local: true) do |form| %>
@@ -25,3 +26,9 @@
     <%= form.submit 'Create Food', class: 'btn btn-primary' %>
   </div>
 <% end %>
+
+// new
+
+  <h1>Add Food </h1>
+  <%= render 'form_recipe', food: @food %>
+  <br>
