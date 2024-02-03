@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.feature 'Recipe Show Page', type: :feature do
   include Warden::Test::Helpers
-  let!(:user) { User.create(email: 'user@example.com', password: 'password') }
+  let!(:user) { User.create(email: 'user@example.com', password: 'password', confirmed_at: Time.now) }
   let!(:recipe) do
     Recipe.create(name: 'Recipe 1', preparation_time: '2', cooking_time: '2', description: 'some description',
                   public: true, user:)

@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.feature 'Public Recipes Page', type: :feature do
-  let(:user) { User.create(email: 'user@example.com', password: 'password', name: 'John Doe') }
+  let(:user) { User.create(email: 'user@example.com', password: 'password', name: 'John Doe', confirmed_at: Time.now) }
   let(:public_recipes) do
     [
       Recipe.create(name: 'Recipe 1', description: 'Description 1', public: true, user:),

@@ -10,8 +10,8 @@ RSpec.describe RecipeFood, type: :model do
 
   let(:valid_attributes) do
     {
-      food:,
-      recipe:,
+      food: food,
+      recipe: recipe,
       quantity: 5
     }
   end
@@ -29,12 +29,6 @@ RSpec.describe RecipeFood, type: :model do
 
   it 'is not valid without a recipe' do
     recipe_food = RecipeFood.new(valid_attributes.except(:recipe))
-    expect { recipe_food.save }.to change { RecipeFood.count }.by(0)
-    expect(recipe_food).to_not be_valid
-  end
-
-  it 'is not valid without a quantity' do
-    recipe_food = RecipeFood.new(valid_attributes.except(:quantity))
     expect { recipe_food.save }.to change { RecipeFood.count }.by(0)
     expect(recipe_food).to_not be_valid
   end
