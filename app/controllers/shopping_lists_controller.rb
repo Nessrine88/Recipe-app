@@ -39,7 +39,6 @@ class ShoppingListsController < ApplicationController
     end
   end
 
-
   def default
     @recipes = current_user.recipes
     @recipes_food = []
@@ -55,10 +54,9 @@ class ShoppingListsController < ApplicationController
 
     @missing_food_items = @recipes_food - @inventories_food
 
-  def calculate_totals
-    @total_food_items = @missing_food_items.sum(&:quantity)
-    @total_price = @missing_food_items.sum { |item| item.quantity * item.food.price }
-
+    def calculate_totals
+      @total_food_items = @missing_food_items.sum(&:quantity)
+      @total_price = @missing_food_items.sum { |item| item.quantity * item.food.price }
+    end
   end
-end
 end
