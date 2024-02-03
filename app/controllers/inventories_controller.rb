@@ -38,6 +38,7 @@ class InventoriesController < ApplicationController
 
   # DELETE /inventories/1 or /inventories/1.json
   def destroy
+    puts "Destroy action called"
     inventory = Inventory.find(params[:id])
     inventory.inventory_foods.destroy_all
     inventory.destroy

@@ -1,0 +1,3 @@
+<% if current_user %>
+  <%= button_to "Remove", inventory_path(inventory), method: :delete, class: "btn btn-danger mt-3", data: { confirm: "Are you sure?" } %>
+<% end %>
