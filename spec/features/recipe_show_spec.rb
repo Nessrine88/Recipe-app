@@ -2,11 +2,12 @@ require 'rails_helper'
 
 RSpec.feature 'Recipe Show Page', type: :feature do
   include Warden::Test::Helpers
-  let!(:user) { User.create(email: "user@example.com", password: "password") }
+  let!(:user) { User.create(email: 'user@example.com', password: 'password') }
   let!(:recipe) do
-    Recipe.create(name: 'Recipe 1', preparation_time: '2', cooking_time: '2', description: 'some description', public: true, user: user)
+    Recipe.create(name: 'Recipe 1', preparation_time: '2', cooking_time: '2', description: 'some description',
+                  public: true, user:)
   end
-  let!(:inventory) { Inventory.create(name: 'Inventory 1', user: user) }
+  let!(:inventory) { Inventory.create(name: 'Inventory 1', user:) }
 
   before do
     login_as(user, scope: :user)

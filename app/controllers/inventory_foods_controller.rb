@@ -1,6 +1,5 @@
 # app/controllers/inventory_foods_controller.rb
 class InventoryFoodsController < ApplicationController
- 
   def index
     @inventory = Inventory.find(params[:inventory_id])
     @inventory_foods = @inventory.inventory_foods
@@ -20,8 +19,7 @@ class InventoryFoodsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @inventory_food.update(inventory_food_params)
