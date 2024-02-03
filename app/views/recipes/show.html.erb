@@ -25,12 +25,14 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-between w-75 d-block mx-auto">
-  <button class="btn btn-warning" id="gen">Generate shopping list</button>
-  <% if current_user.id == @recipe.user_id %>
-    <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-primary' %>
-  <% end %>
-</div>
+<turbo-frame id="shopping-list-frame">
+    <div class="d-flex justify-content-between w-75 d-block mx-auto">
+      <button class="btn btn-warning" id="gen">Generate shopping list</button>
+      <% if current_user.id == @recipe.user_id %>
+        <%= link_to "Add ingredient", new_recipe_recipe_food_path(@recipe), class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </turbo-frame>
 
 <div class="d-block mx-auto w-75">
 
@@ -82,23 +84,25 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-  let label = document.querySelector('#label');
+
+document.addEventListener('turbo:load', function() {
   let btn = document.querySelector('#gen');
-  let gen_block = document.querySelector('#hide');
-  
+  let genBlock = document.querySelector('#hide');
+
   btn.addEventListener('click', () => {
-    gen_block.style.display = 'block';
+    genBlock.style.display = 'block';
   });
 
-  var generate = document.querySelector('#generate-button');
-  generate.addEventListener('click', () => {
-    var selectedInventory = document.getElementById('select-inventory');
-    var selectedInventoryId = selectedInventory.value;
-    var shoppingListUrl = "<%= shopping_lists_path%>";
-    var modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=' + <%= @recipe.id %>;
-    window.location.href = modifiedUrl;
-  });
+  let generateButton = document.querySelector('#generate-button');
+  if (generateButton) {
+    generateButton.addEventListener('click', () => {
+      let selectedInventory = document.getElementById('select-inventory');
+      let selectedInventoryId = selectedInventory.value;
+      let shoppingListUrl = "<%= shopping_lists_path %>";
+      let modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=' + <%= @recipe.id %>;
+
+      Turbo.visit(modifiedUrl, { action: "replace" });
+    });
+  }
 });
 </script>
-
