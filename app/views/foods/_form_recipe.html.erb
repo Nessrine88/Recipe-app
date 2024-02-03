@@ -1,6 +1,6 @@
 <!-- app/views/foods/_form.html.erb -->
 
-<%= form_with(model: food, url: recipe_foods_path(@recipe), local: true) do |form| %>
+<%= form_with(model: food, url: foods_path, local: true) do |form| %>
   <div class="field">
     <%= form.label :name, 'Food Name' %>
     <%= form.text_field :name, class: 'form-control', required: true %>
@@ -14,11 +14,6 @@
   <div class="field">
     <%= form.label :price, 'Price' %>
     <%= form.number_field :price, class: 'form-control', required: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :quantity, 'Quantity' %>
-    <%= form.number_field :quantity, class: 'form-control', required: true %>
   </div>
 
   <div class="actions mt-3">
