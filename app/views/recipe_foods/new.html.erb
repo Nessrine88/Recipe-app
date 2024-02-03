@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <%= form_with model: RecipeFood, local: true do |form| %>
+  <%= form_with  local: true do |form| %>
     <div class="form-group">
       <%= form.label :food_id, class: "d-block label" %>
       <%= form.collection_select :food_id, Food.all, :id, :name, { prompt: 'Select Food' }, class: 'form-control select-field' %>

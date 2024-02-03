@@ -2,17 +2,17 @@
 class RecipeFoodsController < ApplicationController
   before_action :set_recipe
 
-  def new 
-    @recipe_food = RecipeFood.new()
+  def new
+    @recipe_food = RecipeFood.new
   end
 
   def create
     @recipe_food = @recipe.recipe_foods.new(recipe_food_params)
 
     if @recipe_food.save
-      redirect_to recipe_path(@recipe), notice: 'Food was successfully created.'
+      redirect_to @recipe, notice: 'Recipe Food was successfully created.'
     else
-      render:new
+      render :new
     end
   end
 
@@ -23,6 +23,6 @@ class RecipeFoodsController < ApplicationController
   end
 
   def recipe_food_params
-    params.require(:recipe_food).permit(:food_id,:name, :quantity)
+    params.require(:recipe_food).permit(:food_id, :quantity)
   end
 end

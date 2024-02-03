@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'public_recipes', to: 'recipes#public_recipes', as: :public_recipes
 
   resources :recipes, except: [:update] do
-    resources :recipe_foods
+    resources :recipe_foods, only: [:new, :create]
     member do
       patch 'toggle', to: 'recipes#toggle_recipe'
     end
