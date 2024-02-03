@@ -70,7 +70,7 @@
 </div>
 
 <div class="w-50 bg-light hauteur border border-1 position-absolute top-50 start-50 translate-middle ps-3" id="hide">
-<span id="close-popup" class="close-icon float-right">&times;</span>
+<span id="close-popup" class="close-icon cursor-pointer" align= "right">&times;</span>
 <h2 class="text-center text-secondary mb-3">Generating Shopping List</h2>
   <h5 class="mt-3 mb-3">Choose an inventory to use</h5>
   <%= form_with model: @recipe, url: shopping_lists_path, local: false, remote: true, html: { id: 'generate-form', method: :post } do |f| %>
@@ -91,6 +91,11 @@ document.addEventListener('turbo:load', function() {
 
   btn.addEventListener('click', () => {
     genBlock.style.display = 'block';
+  });
+
+  let closeIcon = document.querySelector('#close-popup');
+  closeIcon.addEventListener('click', () => {
+    genBlock.style.display = 'none';
   });
 
   let generateButton = document.querySelector('#generate-button');

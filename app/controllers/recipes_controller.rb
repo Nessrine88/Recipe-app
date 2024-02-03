@@ -16,7 +16,6 @@ class RecipesController < ApplicationController
   end
 
   def create
-    
     @recipe = current_user.recipes.build(recipe_params)
     if @recipe.save
       redirect_to recipes_url, notice: 'Recipe was successfully created'
