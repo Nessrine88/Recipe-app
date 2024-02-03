@@ -1,10 +1,7 @@
 class InventoryFoodsController < ApplicationController
-<<<<<<< HEAD
-=======
   before_action :set_inventory, only: [:destroy]
   before_action :set_inventory_food, only: [:destroy]
 
->>>>>>> ccbd053eb3ea36a57e5279a01f247c9442c7355d
   def index
     @inventory_foods = InventoryFood.includes(:food).where(inventory_id: @inventory.id)
   end
@@ -23,21 +20,7 @@ class InventoryFoodsController < ApplicationController
     if @inventory_food.save
       redirect_to @inventory
     else
-<<<<<<< HEAD
-      render :new
-    end
-  end
-
-  def edit; end
-
-  def update
-    if @inventory_food.update(inventory_food_params)
-      redirect_to inventory_foods_path, notice: 'Inventory food was successfully updated.'
-    else
-      render :edit
-=======
       render :new, status: :unprocessable_entity
->>>>>>> ccbd053eb3ea36a57e5279a01f247c9442c7355d
     end
   end
 
