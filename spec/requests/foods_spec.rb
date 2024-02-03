@@ -13,9 +13,9 @@ RSpec.describe Recipe, type: :model do
       let(:valid_attributes) { attributes_for(:food) }
 
       it 'creates a new food' do
-        expect {
+        expect do
           post :create, params: { food: valid_attributes }
-        }.to change(Food, :count).by(1)
+        end.to change(Food, :count).by(1)
       end
 
       it 'redirects to the created food' do

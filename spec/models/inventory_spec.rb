@@ -7,7 +7,7 @@ RSpec.describe Inventory, type: :model do
 
   let(:valid_attributes) do
     {
-      user: user,
+      user:,
       description: 'List of food items for inventory'
     }
   end
