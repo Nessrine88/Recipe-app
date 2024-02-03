@@ -7,7 +7,7 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
-    @recipe_foods = @recipe.recipe_foods
+    @recipe_foods = @recipe.recipe_foods.includes(:food)
     @inventories = Inventory.all
   end
 
@@ -38,9 +38,9 @@ class RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
-    @recipe.recipe_foods.destroy_all
-    @recipe.destroy
+    recipe = Recipe.find(params[:id])
+    recipe.recipe_foods.destroy_all
+    recipe.destroy
     redirect_to recipes_url, notice: 'Recipe was successfully deleted'
   end
 

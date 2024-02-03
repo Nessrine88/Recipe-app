@@ -1,17 +1,17 @@
-<div class="inventory-form">
-  <%= form_with model: [@inventory, @inventory_food], method: :post, local: false, scope: :post, html: { class: 'food-form' } do |f| %>
-    <div class="form-group">
-      <%= f.label :food_id, 'Food:', class: 'label' %>
-      <%= f.collection_select(:food_id, @food, :id, :name, { prompt: 'Select Food' }, class: 'select-field') %>
-    </div>
+<h1> Add food belong to inventory</h1>
 
-    <div class="form-group">
-      <%= f.label :quantity, 'Quantity:', class: 'label' %>
-      <%= f.number_field :quantity, class: 'quantity-field' %>
-    </div>
+<%= form_with(model: @inventory_food, url: inventory_inventory_foods_path(@inventory), local: true) do |form| %>
+  <div class="input-group mb-3">
+    <%= form.label :food_id, class: "input-group-text" %>
+    <%= form.select :food_id, @foods.map { |key| [key.name, key.id] }, {}, { class:"form-select" } %>
+  </div>
 
-    <div class="form-group">
-      <%= f.submit 'Submit', class: 'submit-button' %>
-    </div>
-  <% end %>
-</div>
+  <div class="field">
+    <%= form.label :quantity %>
+    <%= form.number_field :quantity, class: 'form-control', required: true %>
+  </div>
+
+  <div class="actions mt-3">
+    <%= form.submit 'Create Food', class: 'btn btn-primary' %>
+  </div>
+<% end %>
