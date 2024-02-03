@@ -21,6 +21,6 @@ Rails.application.routes.draw do
   end
 
   get '/shopping_lists', to: 'shopping_lists#index', as: 'shopping_lists'
-
+  get '/shopping_lists/default', to: 'shopping_lists#default', as: :default_shopping_lists
  
 end

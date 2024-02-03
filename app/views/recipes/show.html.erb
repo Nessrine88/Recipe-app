@@ -71,7 +71,7 @@
 <span id="close-popup" class="close-icon float-right">&times;</span>
 <h2 class="text-center text-secondary mb-3">Generating Shopping List</h2>
   <h5 class="mt-3 mb-3">Choose an inventory to use</h5>
-  <%= form_with model: @recipe, url: shopping_lists_path, local: false do |f| %>
+  <%= form_with model: @recipe, url: shopping_lists_path, local: false, remote: true do |f| %>
     <div class="input-group mb-3 w-75">
       <%= f.label :inventory_id, class: "input-group-text", for: "select-inventory" %>
       <%= f.select :inventory_id, @inventories.order(:name).map { |inventory| [inventory.name, inventory.id] }, {}, { class: "form-control", id: "select-inventory" } %>
@@ -86,18 +86,19 @@ document.addEventListener('DOMContentLoaded', function() {
   let label = document.querySelector('#label');
   let btn = document.querySelector('#gen');
   let gen_block = document.querySelector('#hide');
+  
   btn.addEventListener('click', () => {
     gen_block.style.display = 'block';
   });
-});
 
-var generate = document.querySelector('#generate-button');
-generate.addEventListener('click', () => {
-  var selectedInventory = document.getElementById('select-inventory');
-  var selectedInventoryId = selectedInventory.value;
-  var shoppingListUrl = "<%= shopping_lists_path%>";
-  var modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=' + <%= @recipe.id %>;
-  window.location.href = modifiedUrl;
+  var generate = document.querySelector('#generate-button');
+  generate.addEventListener('click', () => {
+    var selectedInventory = document.getElementById('select-inventory');
+    var selectedInventoryId = selectedInventory.value;
+    var shoppingListUrl = "<%= shopping_lists_path%>";
+    var modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=' + <%= @recipe.id %>;
+    window.location.href = modifiedUrl;
+  });
 });
 </script>
 
