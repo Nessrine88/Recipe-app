@@ -3,18 +3,9 @@
 
   <h1 class="mb-4 text-center">Inventories</h1>
 
-  <div id="inventories">
+  <div class="border m-3 p-3 d-block" id="inventories">
     <% @inventories.each do |inventory| %>
-      <div class="border m-3 p-3 d-block" >
-        <%= render inventory %>
-        </div>
-    <% if current_user %>
-    <%= button_to "Remove", inventory, method: :delete, class: "btn btn-danger mt-3", data: { confirm: "Are you sure?" } %>
-    <%else%>
-    <%= button_to "Remove", inventory, method: :delete, class: "d-none btn btn-danger mt-3", data: { confirm: "Are you sure?" } %>
-      <% end %>
-</div>
-      </div>
+      <%= render inventory %>
     <% end %>
   </div>
 

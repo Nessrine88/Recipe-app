@@ -20,8 +20,7 @@ Rails.application.routes.draw do
     
   end
 
- # config/routes.rb
-resources :shopping_lists
+  get '/shopping_lists', to: 'shopping_lists#index', as: 'shopping_lists'
 
  
 end

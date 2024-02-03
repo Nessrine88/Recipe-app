@@ -90,5 +90,14 @@ document.addEventListener('DOMContentLoaded', function() {
     gen_block.style.display = 'block';
   });
 });
+
+var generate = document.querySelector('#generate-button');
+generate.addEventListener('click', () => {
+  var selectedInventory = document.getElementById('select-inventory');
+  var selectedInventoryId = selectedInventory.value;
+  var shoppingListUrl = "<%= shopping_lists_path%>";
+  var modifiedUrl = shoppingListUrl + '?inventory_id=' + selectedInventoryId + '&recipe_id=' + <%= @recipe.id %>;
+  window.location.href = modifiedUrl;
+});
 </script>
 
