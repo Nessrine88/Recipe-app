@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Food, type: :model do
-  subject { Food.new(name: 'nessrine', price: 35, measurement_unit: 'kg') }
+  subject { Food.new(id: 1, name: 'nessrine', price: 35, measurement_unit: 'kg') }
   before { subject.save }
 
   describe 'validations' do

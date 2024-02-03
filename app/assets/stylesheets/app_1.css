@@ -1,3 +1,7 @@
+*{
+  list-style:none;
+  text-decoration: none;
+}
 .hauteur {
   height: 300px;
 }
