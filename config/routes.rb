@@ -20,8 +20,8 @@ Rails.application.routes.draw do
     
   end
 
- # config/routes.rb
-resources :shopping_lists
+  resources :shopping_lists, only: [:index, :create]
 
+  get '/shopping_lists/default', to: 'shopping_lists#default', as: :default_shopping_lists
  
 end

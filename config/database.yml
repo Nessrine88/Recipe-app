@@ -8,18 +8,15 @@ default: &default
 development:
   <<: *default
   database: recipe_app_development1
-  host: localhost   # or the hostname or IP of your PostgreSQL server
-  port: 5433        # the port where PostgreSQL is running
-  username: postgres
-  password: "1234" 
+  username: developer
+  password: developer
 
 test:
   <<: *default
   database: recipe_app_test1
-  host: localhost   # or the hostname or IP of your PostgreSQL server
-  port: 5433        # the port where PostgreSQL is running
-  username: postgres
-  password: "1234" 
+  username: developer
+  password: developer
+
 production:
   <<: *default
   database: recipe_app_production1
