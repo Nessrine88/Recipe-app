@@ -5,9 +5,12 @@
 
   <div class="border m-3 p-3 d-block" id="inventories">
     <% @inventories.each do |inventory| %>
-      <%= render inventory %>
+
+      <div class="border m-3 p-3 d-block" >
+        <%= render inventory %>
+      </div>
     <% end %>
   </div>
 
-  <%= link_to "New Inventory", new_inventory_path, class: "btn btn-danger mt-3 d-block mx-auto" %>
+  <%= link_to "New Inventory", new_inventory_path, class: "btn btn-danger mt-3 d-block mx-auto w-25" %>
 </div>
