@@ -1,6 +1,6 @@
 <h1 class="col-xs-1" align="center"><%= @inventory.name %></h1>
 <div class="col-xs-1 m-5" align="right">
-<%= link_to 'Create Food', new_inventory_food_path(@inventory), class: 'btn btn-success' %>
+<%= link_to 'Create associate Food',new_inventory_inventory_food_path(@inventory) %>
 </div>
 <% if @inventory_foods.present? %>
   <table class="table table-striped table-bordered">

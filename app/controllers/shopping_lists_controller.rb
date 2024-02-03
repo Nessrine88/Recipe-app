@@ -48,6 +48,4 @@ class ShoppingListsController < ApplicationController
     @total_food_items = @missing_food_items.sum(&:quantity)
     @total_price = @missing_food_items.sum { |item| item.quantity * item.food.price }
   end
-
-  
 end
