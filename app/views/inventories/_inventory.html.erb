@@ -1,10 +1,15 @@
-<div class="d-flex justify-content-between align-items-center">
-  <%= link_to inventory.name, inventory_path(inventory) %>
+<div  class="d-flex justify-content-between align-items-center">
+    <%= link_to inventory.name, inventory_path(inventory) %>
   <p class="mx-auto w-50">
     <%= inventory.description %>
   </p>
-
-  <% if current_user.id == inventory.user_id %>
-    <%= render 'inventories/actions', inventory: inventory %>
-  <% end %>
+</div>
+    <% if current_user.id == inventory.user_id %>
+        <%= form_with model: inventory, url: inventory_path(inventory), method: :delete, local: false do |f| %>
+          <%= f.hidden_field :inventory_id, value: "1" %>
+          <%= f.submit "Delete", class: "btn btn-danger" %>
+        <% end %>
+    <%else%>
+      <% %>
+      <% end %>
 </div>
