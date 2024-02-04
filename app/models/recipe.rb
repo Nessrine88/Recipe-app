@@ -9,6 +9,7 @@ class Recipe < ApplicationRecord
   validates :cooking_time, presence: true, numericality: { greater_than_or_equal_to: 0 }
   validates :public, inclusion: { in: [true, false] }
   validates :user, presence: true
+  validates :public, inclusion: { in: [true, false] }
 
   def calculate_total_amount
     total_amount = 0
