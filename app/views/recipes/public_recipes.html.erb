@@ -1,0 +1,17 @@
+<div class="public_recipes_container m-4">
+  <h1 class="text-center mb-4">Public Recipes</h1>
+  <% @public_recipes.each do |recipe| %>
+    <div class="public_recipe_list border p-3 mb-3">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h3><%= link_to recipe.name, recipe_path(recipe) %></h3>
+          <p>By: <%= recipe.user.name %></p>
+        </div>
+        <div>
+          <p class="mb-0">Total Food Items: <%= recipe.recipe_foods.count %></p>
+          <p class="mb-0">Total Amount: $<%= recipe.calculate_total_amount %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

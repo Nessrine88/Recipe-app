@@ -1,0 +1,21 @@
+<div class="recipe-list-container">
+  <h1 class="text-center mb-4">My Recipes</h1>
+  <ul class="list-group">
+    <% if @recipes.any? %>
+      <% @recipes.each do |recipe| %>
+        <li class="list-group-item border m-3 p-3 d-flex justify-content-between align-items-center">
+        <div>
+          <%= link_to recipe.name, recipe_path(recipe) %>
+          <%= button_to 'Delete', recipe, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger mt-3 me-2' %>
+          </div>
+          <div class="d-flex">
+            <p class="mb-0"><%= recipe.description %></p>
+          </div>
+        </li>
+      <% end %>
+      <p class="mt-4"><%= link_to 'Create a new recipe', new_recipe_path, class: 'btn btn-success m-2' %></p>
+    <% else %>
+      <p class="text-muted">No recipes yet.<br> <%= link_to 'Create a new recipe', new_recipe_path, class: 'btn btn-success' %></p>
+    <% end %>
+  </ul>
+</div>

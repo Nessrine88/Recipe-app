@@ -1,0 +1,35 @@
+<body>
+  <div class="mrgns">
+    <h1>
+      Full Shopping List
+    </h1>
+    <div class="shopping_list_data">
+      <div>
+        <p class="info">Amount of food to buy: <%= @missing_food_items.map { |item| item.quantity }.sum %></p>
+        <p class="info">Total value of food needed: $<%= @missing_food_items.map { |item| item.quantity * item.food.price }.sum %></p>
+      </div>
+    </div>
+    <div>
+      <% if @missing_food_items.present? %>
+        <table>
+          <thead>
+            <tr>
+              <th>Food</th>
+              <th>Quantity</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @missing_food_items.each do |item| %>
+              <tr>
+                <td><%= Food.find(item.food_id).name %></td>
+                <td><%= item.quantity %></td>
+                <td><%= Food.find(item.food_id).price %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</body>

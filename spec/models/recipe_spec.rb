@@ -1,0 +1,51 @@
+require 'rails_helper'
+require 'factory_bot_rails'
+
+RSpec.configure do |config|
+  config.include FactoryBot::Syntax::Methods
+end
+
+RSpec.describe Recipe, type: :model do
+  describe 'validations' do
+    subject { described_class.new }
+
+    it 'is not valid without a name' do
+      expect(subject).to_not be_valid
+      expect(subject.errors[:name]).to include("can't be blank")
+    end
+
+    it 'is not valid without a description' do
+      expect(subject).to_not be_valid
+      expect(subject.errors[:description]).to include("can't be blank")
+    end
+
+    it 'is not valid without a non-negative preparation time' do
+      subject.preparation_time = -5
+      expect(subject).to_not be_valid
+      expect(subject.errors[:preparation_time]).to include('must be greater than or equal to 0')
+    end
+
+    it 'is not valid without a non-negative cooking time' do
+      subject.cooking_time = -3
+      expect(subject).to_not be_valid
+      expect(subject.errors[:cooking_time]).to include('must be greater than or equal to 0')
+    end
+    it 'is not valid without a user' do
+      expect(subject).to_not be_valid
+      expect(subject.errors[:user]).to include("can't be blank")
+    end
+
+    it 'is not valid without a boolean value for public' do
+      recipe= create(:recipe)
+      recipe.public = nil
+      expect(recipe).not_to be_valid
+    end
+
+    it 'calculates the total amount correctly' do
+      food = create(:food)
+      recipe= create(:recipe)
+      recipe_food = create(:recipe_food, recipe: recipe, food: food, quantity: 2)
+      expect(recipe.calculate_total_amount).to eq(food.price * recipe_food.quantity)
+    end
+  end
+end

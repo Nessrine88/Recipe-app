@@ -1,0 +1,25 @@
+* {
+  list-style: none;
+  text-decoration: none;
+}
+
+.hauteur {
+  height: 300px;
+}
+
+#hide {
+  display: none;
+}
+
+#close-popup {
+  cursor: pointer;
+}
+
+#close-popup:hover {
+  cursor: pointer;
+}
+
+.navbar-brand img {
+  width: 50px;
+  height: 50px;
+}

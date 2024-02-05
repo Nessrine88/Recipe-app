@@ -1,0 +1,15 @@
+<div class="container mt-3">
+  <p class="text-success"><%= notice %></p>
+
+  <h1 class="mb-4 text-center">Inventories</h1>
+
+  <div class="border m-3 p-3 d-block" id="inventories">
+    <% @inventories.each do |inventory| %>
+      <div class="border m-3 p-3 d-block">
+      <%= render inventory %>
+      </div>
+    <% end %>
+  </div>
+
+  <%= link_to "New Inventory", new_inventory_path, class: "btn btn-success m-3 d-block mx-auto w-25" %>
+</div>
